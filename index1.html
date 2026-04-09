@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>VRH Dashboard</title>
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
+.sidebar{width:220px;height:100vh;background:#1e293b;position:fixed;padding:20px}
+.sidebar h2{color:#38bdf8}
+.nav{padding:10px;color:#94a3b8;cursor:pointer}
+.nav:hover{color:#fff}
+.main{margin-left:220px;padding:20px}
+
+.card{background:#1e293b;padding:15px;border-radius:8px;margin-bottom:15px}
+.stats{display:flex;gap:15px}
+.stat{flex:1;background:#334155;padding:15px;border-radius:6px}
+
+table{width:100%;border-collapse:collapse;background:#1e293b}
+th,td{padding:10px;border-bottom:1px solid #334155}
+
+button{padding:6px 12px;border:none;background:#38bdf8;color:#000;cursor:pointer;margin:5px}
+
+.modal{display:none;position:fixed;top:25%;left:35%;background:#1e293b;padding:20px;border-radius:8px}
+input{width:100%;padding:8px;margin:5px 0}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>VRH</h2>
+<div class="nav" onclick="show('dashboard')">Dashboard</div>
+<div class="nav" onclick="show('requests')">Requests</div>
+<div class="nav" onclick="show('customers')">Customers</div>
+<div class="nav" onclick="show('mechanics')">Mechanics</div>
+</div>
+
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+<h2>Dashboard</h2>
+<div class="stats">
+<div class="stat">Customers<br><b>24</b></div>
+<div class="stat">Mechanics<br><b>8</b></div>
+<div class="stat">Revenue<br><b>₹1.8L</b></div>
+</div>
+</div>
+
+<!-- REQUESTS -->
+<div id="requests" style="display:none">
+<h2>Service Requests</h2>
+<button onclick="openForm()">+ Add Request</button>
+<table>
+<tr><th>Name</th><th>Vehicle</th><th>Status</th><th>Action</th></tr>
+<tr>
+<td>Ashray</td><td>Honda City</td><td>Pending</td>
+<td><button onclick="approve(this)">Approve</button></td>
+</tr>
+<tr>
+<td>Rajan</td><td>Creta</td><td>Completed</td>
+<td><button onclick="removeRow(this)">Delete</button></td>
+</tr>
+</table>
+</div>
+
+<!-- CUSTOMERS -->
+<div id="customers" style="display:none">
+<h2>Customers</h2>
+<button onclick="addCustomer()">+ Add Customer</button>
+<table>
+<tr><th>Name</th><th>Phone</th></tr>
+<tr><td>Ashray</td><td>9876543210</td></tr>
+<tr><td>Rajan</td><td>9988776655</td></tr>
+</table>
+</div>
+
+<!-- MECHANICS -->
+<div id="mechanics" style="display:none">
+<h2>Mechanics</h2>
+<div class="card">
+<b>Albert Vance</b><br>
+Specialist: Cars<br>
+Rating: 4.8⭐
+</div>
+
+<div class="card">
+<b>Rinku Padiyar</b><br>
+Specialist: Bikes<br>
+Rating: 4.5⭐
+</div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="form">
+<h3>Add Request</h3>
+<input placeholder="Customer Name">
+<input placeholder="Vehicle">
+<button onclick="closeForm()">Save</button>
+</div>
+
+<script>
+function show(section){
+document.getElementById('dashboard').style.display='none'
+document.getElementById('requests').style.display='none'
+document.getElementById('customers').style.display='none'
+document.getElementById('mechanics').style.display='none'
+document.getElementById(section).style.display='block'
+}
+
+function openForm(){document.getElementById('form').style.display='block'}
+function closeForm(){document.getElementById('form').style.display='none'}
+
+function approve(btn){
+btn.parentElement.previousElementSibling.innerText="Approved"
+}
+
+function removeRow(btn){
+btn.parentElement.parentElement.remove()
+}
+
+function addCustomer(){
+alert("Customer Added")
+}
+</script>
+
+</body>
+</html>
